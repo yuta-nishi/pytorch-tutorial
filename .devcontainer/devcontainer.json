@@ -1,0 +1,43 @@
+{
+  "name": "pytorch-tutorial",
+  "dockerComposeFile": "./docker-compose.yml",
+  "service": "pytorch-tutorial",
+  "workspaceFolder": "/workspace",
+  "overrideCommand": true,
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        // common
+        "ms-azuretools.vscode-docker",
+        "streetsidesoftware.code-spell-checker",
+        "GitHub.copilot",
+        "github.copilot-labs",
+        "formulahendry.code-runner",
+        "VisualStudioExptTeam.vscodeintellicode",
+        "editorconfig.editorconfig",
+        "mhutchie.git-graph",
+        "oderwat.indent-rainbow",
+        "ritwickdey.liveserver",
+        "ms-vscode.makefile-tools",
+        "yzhang.markdown-all-in-one",
+        "christian-kohler.path-intellisense",
+        "mechatroner.rainbow-csv",
+        "mutantdino.resourcemonitor",
+        "be5invis.toml",
+        "wakatime.vscode-wakatime",
+        "redhat.vscode-yaml",
+        "dotjoshjohnson.xml",
+        // python
+        "ms-python.python",
+        "ms-python.vscode-pylance",
+        "ms-python.isort",
+        "ms-python.black-formatter",
+        "ms-toolsai.jupyter",
+        "njpwerner.autodocstring",
+        "donjayamanne.python-environment-manager",
+        "ms-python.mypy-type-checker",
+        "charliermarsh.ruff"
+      ]
+    }
+  }
+}

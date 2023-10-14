@@ -1,0 +1,18 @@
+services:
+  pytorch-tutorial:
+    build:
+      context: ..
+      dockerfile: ./.devcontainer/Dockerfile
+    container_name: pytorch-tutorial
+    volumes:
+      - ../:/workspace
+      # When mounting SSH, please don't publish the Docker image.
+      - ~/.ssh:/root/.ssh:ro
+      - ~/.gitconfig:/root/.gitconfig:ro
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
