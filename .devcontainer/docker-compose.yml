@@ -6,6 +6,7 @@ services:
     container_name: pytorch-tutorial
     volumes:
       - ../:/workspace
+      - /home/data/yutanishi/image:/data
       # When mounting SSH, please don't publish the Docker image.
       - ~/.ssh:/home/duser/.ssh:ro
       - ~/.gitconfig:/home/duser/.gitconfig:ro

@@ -27,6 +27,8 @@
         "wakatime.vscode-wakatime",
         "redhat.vscode-yaml",
         "dotjoshjohnson.xml",
+        "tamasfe.even-better-toml",
+        "codezombiech.gitignore",
         // python
         "ms-python.python",
         "ms-python.vscode-pylance",
