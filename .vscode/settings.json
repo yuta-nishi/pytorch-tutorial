@@ -1,0 +1,15 @@
+{
+  "python.defaultInterpreterPath": "/opt/conda/bin/python",
+  "ruff.path": [
+    "/opt/conda/bin/ruff"
+  ],
+  "black-formatter.path": [
+    "/opt/conda/bin/black"
+  ],
+  "mypy-type-checker.path": [
+    "/opt/conda/bin/mypy"
+  ],
+  "mypy-type-checker.interpreter": [
+    "/opt/conda/bin/python"
+  ],
+}
