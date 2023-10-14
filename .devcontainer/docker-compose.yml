@@ -7,8 +7,9 @@ services:
     volumes:
       - ../:/workspace
       # When mounting SSH, please don't publish the Docker image.
-      - ~/.ssh:/root/.ssh:ro
-      - ~/.gitconfig:/root/.gitconfig:ro
+      - ~/.ssh:/home/duser/.ssh:ro
+      - ~/.gitconfig:/home/duser/.gitconfig:ro
+      - ~/.bashrc:/home/duser/.bashrc:ro
     deploy:
       resources:
         reservations:
