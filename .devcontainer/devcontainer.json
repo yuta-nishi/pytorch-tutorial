@@ -1,6 +1,6 @@
 {
   "name": "pytorch-tutorial",
-  "dockerComposeFile": "./docker-compose.yml",
+  "dockerComposeFile": "./compose.yml",
   "service": "pytorch-tutorial",
   "workspaceFolder": "/workspace",
   "overrideCommand": true,

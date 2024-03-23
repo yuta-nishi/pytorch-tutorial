@@ -3,7 +3,7 @@ services:
     build:
       context: ..
       dockerfile: ./.devcontainer/Dockerfile
-    container_name: pytorch-tutorial
+    container_name: yutanishi
     volumes:
       - ../:/workspace
       - /home/data/yutanishi/image:/data
@@ -16,5 +16,5 @@ services:
         reservations:
           devices:
             - driver: nvidia
-              count: 1
+              count: 2
               capabilities: [gpu]
