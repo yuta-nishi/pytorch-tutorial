@@ -36,7 +36,9 @@ RUN curl -sSf https://rye-up.com/get | RYE_INSTALL_OPTION="--yes" bash && \
     rye config --set-bool behavior.global-python=true && \
     rye config --set-bool behavior.use-uv=true
 
-COPY ./.python-version ./pyproject.toml ./requirements* ./
+# Required for rye
+COPY ./.python-version ./pyproject.toml ./requirements* ./README.md ./
+
 RUN source "${RYE_HOME}/env" && \
     rye pin "$(cat .python-version)" && \
     rye sync
@@ -52,4 +54,5 @@ RUN addgroup --gid ${GROUP_ID} duser && \
 
 USER duser
 
+# Need to chown to get permissions
 RUN sudo chown -R duser:duser /home/duser
