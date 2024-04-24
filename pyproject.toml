@@ -1,24 +1,20 @@
 [project]
-name = "pytorch-tutorial"
-version = "1.0.0"
-description = "pytorch tutorial"
 authors = [{ name = "yuta-nishi" }]
+description = "pytorch tutorial"
+name = "pytorch-tutorial"
 readme = "README.md"
 requires-python = ">= 3.10"
+version = "1.0.0"
 
 [tool.black]
 line-length = 90
 
-[tool.mypy]
-strict = true
-ignore_missing_imports = true
-
 [tool.ruff]
-select = [
-  "F", # pyflakes
-  "E", # pycodestyle
-  "W", # pycodestyle warnings
-  "I", # isort
-]
 ignore = []
 line-length = 90
+select = [
+  "E", # pycodestyle
+  "F", # pyflakes
+  "I", # isort
+  "W", # pycodestyle warnings
+]
