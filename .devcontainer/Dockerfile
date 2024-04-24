@@ -20,6 +20,7 @@ RUN apt-get update -qq && \
     tmux \
     vim \
     wget \
+    ssh \
     htop && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* && \
