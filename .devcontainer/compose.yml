@@ -5,16 +5,17 @@ services:
       dockerfile: ./.devcontainer/Dockerfile
     container_name: yutanishi
     volumes:
-      - ../:/workspace
-      - /home/data/yutanishi/image:/data
+      - ..:/workspace
+      - /home/data/yutanishi:/data
       # When mounting SSH, please don't publish the Docker image.
       - ~/.ssh:/home/duser/.ssh:ro
       - ~/.gitconfig:/home/duser/.gitconfig:ro
       - ~/.bashrc:/home/duser/.bashrc:ro
+    tty: true
     deploy:
       resources:
         reservations:
           devices:
             - driver: nvidia
-              count: 2
+              count: 1
               capabilities: [gpu]

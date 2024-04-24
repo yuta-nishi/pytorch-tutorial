@@ -1,20 +1,22 @@
 [project]
-authors = [{ name = "yuta-nishi" }]
-description = "pytorch tutorial"
-name = "pytorch-tutorial"
+authors = [{ name = "yuta-nishi", email = "ypmtk437.0209@gmail.com" }]
+dependencies = ["torch>=2.2.2"]
+description = "Add your description here"
+name = "workspace"
 readme = "README.md"
-requires-python = ">= 3.10"
-version = "1.0.0"
+requires-python = ">= 3.11"
+version = "0.1.0"
 
-[tool.black]
-line-length = 90
+[build-system]
+build-backend = "hatchling.build"
+requires = ["hatchling"]
 
-[tool.ruff]
-ignore = []
-line-length = 90
-select = [
-  "E", # pycodestyle
-  "F", # pyflakes
-  "I", # isort
-  "W", # pycodestyle warnings
-]
+[tool.rye]
+dev-dependencies = ["ruff>=0.4.1"]
+managed = true
+
+[tool.hatch.metadata]
+allow-direct-references = true
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/workspace"]

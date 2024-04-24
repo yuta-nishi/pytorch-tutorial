@@ -1,29 +1,55 @@
-FROM pytorch/pytorch:2.1.0-cuda12.1-cudnn8-devel
+FROM nvidia/cuda:11.8.0-cudnn8-devel-ubuntu22.04
 
-# apt-get
-ENV TZ Asia/Tokyo
-ENV DEBIAN_FRONTEND noninteractive
+# environment
+ENV DEBIAN_FRONTEND=noninteractive \
+    TZ=Asia/Tokyo \
+    CUDA_HOME="/usr/local/cuda" \
+    PIP_PREFER_BINARY=1
+
+# workspace
+ENV WORK_PATH="/workspace"
+
+WORKDIR ${WORK_PATH}
+
+# apt install
 RUN apt-get update -qq && \
-    apt-get install -y curl git sudo tmux vim wget htop libglib2.0-0 libsm6 libxrender1 libxext6 libgl1-mesa-dev && \
+    apt-get install -y --no-install-recommends \
+    curl \
+    git \
+    sudo \
+    tmux \
+    vim \
+    wget \
+    htop && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* && \
-    rm -rf /var/cache/apk/*
+    rm -rf /tmp/* /var/tmp/*
 
-# python
-ENV WORK_PATH /workspace
-WORKDIR $WORK_PATH
-ENV PYTHONPATH "/workspace:${PYTHONPATH}"
-ENV PIP_OPTIONS "--no-cache-dir --progress-bar off"
-COPY ./requirements.txt $WORK_PATH/requirements.txt
-RUN pip install ${PIP_OPTIONS} -r $WORK_PATH/requirements.txt && \
-    pip install ${PIP_OPTIONS} -U setuptools
+# rye setting
+ENV RYE_HOME="/home/duser/.rye" \
+    PATH="${RYE_HOME}}/shims:${PATH}"
+
+SHELL ["/bin/bash", "-o", "pipefail", "-c"]
+
+RUN curl -sSf https://rye-up.com/get | RYE_INSTALL_OPTION="--yes" bash && \
+    source "${RYE_HOME}/env" \
+    rye config --set-bool behavior.global-python=true && \
+    rye config --set-bool behavior.use-uv=true
+
+COPY ./.python-version ./pyproject.toml ./requirements* ./
+RUN source "${RYE_HOME}/env" && \
+    rye pin "$(cat .python-version)" && \
+    rye sync
 
 # duser setting
-ENV USER_ID 10001
-ENV GROUP_ID 10001
-RUN addgroup --gid $GROUP_ID duser && \
+ENV USER_ID=3041 \
+    GROUP_ID=1000
+
+RUN addgroup --gid ${GROUP_ID} duser && \
     adduser --disabled-password --gecos "" --uid ${USER_ID} --gid ${GROUP_ID} duser && \
     adduser duser sudo && \
     echo "%sudo ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 
 USER duser
+
+RUN sudo chown -R duser:duser /home/duser
